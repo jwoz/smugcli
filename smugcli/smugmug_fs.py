@@ -204,13 +204,13 @@ class SmugMugFS(object):
 
       node = matched_nodes[-1]
       if recursive or len(node.get_children({'count': 1})) == 0:
-        if force or self._ask('Remove %s node "%s"? ' % (node['Type'], path)):
+        if force or self._ask(f'Remove {path}?'):
           print('Removing "%s".' % path)
           node.delete()
       else:
         print('Folder "%s" is not empty.' % path)
 
-  def upload(self, user, filenames, album):
+  def upload(self, user, filenames, album, force):
     user = user or self._smugmug.get_auth_user()
     matched_nodes, unmatched_dirs = self.path_to_node(user, album)
     if unmatched_dirs:
@@ -224,7 +224,7 @@ class SmugMugFS(object):
 
     for filename in itertools.chain(*(glob.glob(f) for f in filenames)):
       file_basename = os.path.basename(filename).strip()
-      if node.get_child(file_basename):
+      if not force and node.get_child(file_basename):
         print('Skipping "%s", file already exists in Album "%s".' % (filename,
                                                                      album))
         continue

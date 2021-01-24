@@ -167,7 +167,7 @@ def run(args, config=None, requests_sent=None):
   # ---------------
   upload_parser = subparsers.add_parser(
     'upload', help='Upload files to SmugMug.')
-  upload_parser.set_defaults(func=lambda a: fs.upload(a.user, a.src, a.album))
+  upload_parser.set_defaults(func=lambda a: fs.upload(a.user, a.src, a.album, a.force))
   upload_parser.add_argument('src',
                              type=arg_str_type,
                              nargs='+', help='Files to upload.')
@@ -180,6 +180,10 @@ def run(args, config=None, requests_sent=None):
                              help=('User whose SmugMug account is to be '
                                    'accessed. Uses the logged-in user by '
                                    'default.'))
+  upload_parser.add_argument('-f', '--force',
+                         action='store_true',
+                         help=('Upload file even if it already exists.'))
+
   # ---------------
   sync_parser = subparsers.add_parser(
     'sync',

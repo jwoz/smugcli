@@ -205,8 +205,10 @@ class Node(object):
     return id(self)
 
   def get_children(self, params=None):
+    if 'Type' not in self._json and self._json.get('Format', 'NONE') == 'JPG':
+      return []
     if 'Type' not in self._json:
-      raise UnexpectedResponseError('Node does not have a "Type" attribute.')
+      raise UnexpectedResponseError('Node does not have a "Type" attribute and is not of JPG format.')
 
     params = params or {}
     params = {
