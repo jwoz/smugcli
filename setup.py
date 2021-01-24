@@ -12,37 +12,36 @@ install_requires = [
   'colorama>=0.3.9; platform_system=="Windows"',
 
   # For parsing metadata from local files:
-  'hachoir-core>=1.3.3; python_version<"3.0"',
-  'hachoir-metadata>=1.3.3; python_version<"3.0"',
-  'hachoir-parser>=1.3.4; python_version<"3.0"',
-  'hachoir>=3.0; python_version>="3.0"',
+  'hachoir>=3.0',
   'six>=1.15.0'
 ]
 
-with open("README.md", "r") as fh:
+with open('README.md', 'r') as fh:
   long_description = fh.read()
 
+with open('smugcli/version.py') as fh:
+  exec(fh.read())
+
 setuptools.setup(
-  name="smugcli",
-  version="1.0.3",
-  author="Jean-Philippe Gravel",
-  author_email="jpgravel@gmail.com",
-  description="Command line tool for SmugMug",
+  name='smugcli',
+  version=__version__,
+  author='Jean-Philippe Gravel',
+  author_email='jpgravel@gmail.com',
+  description='Command line tool for SmugMug',
   long_description=long_description,
-  long_description_content_type="text/markdown",
-  url="https://github.com/graveljp/smugcli",
+  long_description_content_type='text/markdown',
+  url='https://github.com/graveljp/smugcli',
   packages=setuptools.find_packages(),
   classifiers=[
-    "License :: OSI Approved :: MIT License",
-    "Operating System :: OS Independent",
+    'License :: OSI Approved :: MIT License',
+    'Operating System :: OS Independent',
     'Programming Language :: Python',
-    'Programming Language :: Python :: 2',
-    'Programming Language :: Python :: 2.7',
     'Programming Language :: Python :: 3',
-    'Programming Language :: Python :: 3.4',
     'Programming Language :: Python :: 3.5',
     'Programming Language :: Python :: 3.6',
     'Programming Language :: Python :: 3.7',
+    'Programming Language :: Python :: 3.8',
+    'Programming Language :: Python :: 3.9',
   ],
   install_requires=install_requires,
   entry_points={
